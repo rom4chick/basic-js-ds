@@ -43,28 +43,31 @@ function removeKFromList(list, k) {
         list = list.next
       } else if (cur.next === null) {
         prev.next = null
+      } else if (cur.next.value === k) {
+        cur = cur.next;
+        while (cur.value === k) {
+          cur = prev.next;
+          prev.next = cur.next;
+          cur = cur.next
+          
+        }
+        
+
       } else {
         cur = prev.next;
         prev.next = cur.next;
-      }
+      }    
     }
     prev = cur
     cur = cur.next
   }
 
-  let listArr = [];
-
-  while (list !== null) {
-    listArr.push(list.value)
-    list = list.next;
-  }
-
-  return convertArrayToList(listArr);
+  return list;
 }
 
 
 
-console.log(removeKFromList(convertArrayToList([1, 2, 3]), 3))
+console.log(removeKFromList(convertArrayToList([1, 2, 3, 3, 4, 5]), 3))
 
 module.exports = {
   removeKFromList
