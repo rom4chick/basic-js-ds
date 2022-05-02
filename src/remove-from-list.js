@@ -42,7 +42,7 @@ function removeKFromList(list, k) {
       if (prev === null) {
         list = list.next
       } else if (cur.next === null) {
-        
+        prev.next = null
       } else {
         cur = prev.next;
         prev.next = cur.next;
@@ -64,7 +64,7 @@ function removeKFromList(list, k) {
 
 
 
-console.log(removeKFromList(convertArrayToList([3, 1, 2, 3, 4, 5]), 3))
+console.log(removeKFromList(convertArrayToList([1, 2, 3]), 3))
 
 module.exports = {
   removeKFromList
