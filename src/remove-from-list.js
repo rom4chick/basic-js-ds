@@ -22,28 +22,7 @@ const { ListNode } = require('../extensions/list-node.js');
  *   }
  * }
  */
-function removeKFromList(list, k) {
-  let cur = list;
-  while (cur.next !== null) {
-    if (cur.next.value === k) {
-      let tempNode = cur.next;
-      cur = tempNode.next;
-      break;
-    }
-    cur = cur.next
-  }
-
-  let listArr = [];
-
-  while (list !== null) {
-    listArr.push(list.value)
-    list = list.next;
-  }
-
-  return listArr;
-}
-
-function convertArrayToList(arr) {
+ function convertArrayToList(arr) {
   return arr.reverse().reduce((acc, cur) => {
     if (acc) {
       const node = new ListNode(cur);
@@ -55,7 +34,37 @@ function convertArrayToList(arr) {
   }, null);
 }
 
-console.log(removeKFromList(convertArrayToList([3, 1, 2, 3, 4, 5]), 2))
+function removeKFromList(list, k) {
+  let cur = list;
+  let prev = null;
+  while (cur !== null) {
+    if (cur.value === k) {
+      if (prev === null) {
+        list = list.next
+      } else if (cur.next === null) {
+        
+      } else {
+        cur = prev.next;
+        prev.next = cur.next;
+      }
+    }
+    prev = cur
+    cur = cur.next
+  }
+
+  let listArr = [];
+
+  while (list !== null) {
+    listArr.push(list.value)
+    list = list.next;
+  }
+
+  return convertArrayToList(listArr);
+}
+
+
+
+console.log(removeKFromList(convertArrayToList([3, 1, 2, 3, 4, 5]), 3))
 
 module.exports = {
   removeKFromList
